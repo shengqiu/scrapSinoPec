@@ -3,3 +3,4 @@
 /.webpage./*
 /webpage/*
 */__pycache__/
+*.db
