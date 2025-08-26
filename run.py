@@ -1,8 +1,12 @@
-import sys
-from util.url import download_webpage
-
+from util.url import config, get_listing_from_index, get_webpage_index
+from util.parse import get_index_list_from_index_response
+import time
 
 if __name__ == "__main__":
-    num = sys.argv[1]
-    url_to_download = "https://ec.sinopec.com/f/supp/notice/bidNotice.do?id=" + str(num)
-    download_webpage(url_to_download, "webpage/{}.html".format(num))
+    page_no = config['payload']['pageNo']
+    index_response = get_webpage_index(page_no)
+    index_list = get_index_list_from_index_response(index_response)
+    for index in index_list:
+        print(index)
+        print(get_listing_from_index(index))
+        time.sleep(1)

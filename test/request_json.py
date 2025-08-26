@@ -13,4 +13,8 @@ headers = {
 }
 response = requests.post(url, headers=headers, data=payload)
 data = json.loads(response.text)['result']['result']
-print(data)
+id_list = [x['id'] for x in data]
+
+with open('webpage/index.txt', 'w') as file:
+    for item in id_list:
+        file.write(str(item) + '\n')

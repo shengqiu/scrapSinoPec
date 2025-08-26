@@ -1,43 +1,51 @@
+import requests, yaml
+config = yaml.safe_load(open("config/sinoPec.yaml"))
 
-import requests, time
 
-
-def download_webpage(url, filename="webpage.html"):
+def get_response(url):
     """
     Downloads the HTML content of a webpage and saves it to a file.
     Args:
         url (str): The URL of the webpage to download.
-        filename (str): The name of the file to save the content to.
     """
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
-        with open(filename, "wb") as f:
-            f.write(response.content)
-        print(f"Webpage downloaded successfully to {filename}")
+        return response
     except requests.exceptions.RequestException as e:
         print(f"Error downloading webpage: {e}")
 
 
-def get_parent_webpage(url, payload):
+def get_webpage_index(page_no=1):
     """
     Downloads the HTML content of a webpage and saves it to a file.
     Args:
         url (str): The URL of the webpage to download.
         filename (str): The name of the file to save the content to.
     """
+    url = config['parent_url']
+    index_type = config['payload']['type']
+    headers = config['headers']
+    payload = {
+        "pageNo": page_no,
+        "type":index_type 
+    }
     try:
         s = requests.Session()
         response = s.post(
-            url, 
+            url,
             data=payload,
-            headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-            }
+            headers=headers
         )
         response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
         print(response.status_code)
-        print(response.text)
-        return response.text
+        return response
     except requests.exceptions.RequestException as e:
         print(f"Error downloading webpage: {e}")
+
+
+def get_listing_from_index(num):
+    listing_url = config['listing_url']
+    # store_page_string = config['store_page_string']
+    url_to_download = listing_url + str(num)
+    return get_response(url_to_download)
