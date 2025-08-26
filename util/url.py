@@ -11,6 +11,7 @@ def get_response(url):
     try:
         response = requests.get(url)
         response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+        print(response.status_code)
         return response
     except requests.exceptions.RequestException as e:
         print(f"Error downloading webpage: {e}")

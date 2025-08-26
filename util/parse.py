@@ -15,7 +15,7 @@ def get_index_list_from_content(response):
     return id_list
 
 
-def get_winner_from_response(response):
+def parse_winner_response(response):
     """
     Extracts a table from the HTML content of a webpage.
     Args:
@@ -24,32 +24,14 @@ def get_winner_from_response(response):
         bs4.element.Tag: The extracted table as a BeautifulSoup Tag object.
     """
     soup = bs(response.text, 'html.parser')
-    table = soup.find_all('table')[2]
-    return table.get_text(strip=True).replace('物资名称成交供应商', ' ')
-
-
-def get_contact_from_response(response):
-    """
-    Extracts a table from the HTML content of a webpage.
-    Args:
-        html_content (str): The HTML content of the webpage.
-    Returns:
-        bs4.element.Tag: The extracted table as a BeautifulSoup Tag object.
-    """
-    soup = bs(response.text, 'html.parser')
-    table = soup.find_all('table')[3]
-    return table.get_text(strip=True)
-
-
-def get_date_from_response(response):
-    """
-    Extracts the date from the HTML content of a webpage.
-    Args:
-        html_content (str): The HTML content of the webpage.
-    Returns:
-        str: The extracted date as a string.
-    """
-    soup = bs(response.text, 'html.parser')
+    winner_table = soup.find_all('table')[2]
+    winner =  winner_table.get_text(strip=True).replace('物资名称成交供应商', '')
+    contact_table = soup.find_all('table')[3]
+    contact = contact_table.get_text(strip=True)
     date_elements = soup.find('div', class_='wrapTitle').find_all('b')
     data_elements_text = ' '.join([x.get_text(strip=True) for x in date_elements])
-    return data_elements_text
+    return {
+        'winner': winner,
+        'contact': contact,
+        'date': data_elements_text
+    }
