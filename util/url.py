@@ -50,3 +50,10 @@ def get_listing_from_index(num):
     # store_page_string = config['store_page_string']
     url_to_download = listing_url + str(num)
     return get_response(url_to_download)
+
+
+#7 TODO: get the indices from the first couple of pages
+
+#8 TODO: check if the indices are in database, and output the new indices
+
+#9 TODO: get the listing from the new indices
