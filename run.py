@@ -1,5 +1,5 @@
 import sys
-from utl import download_webpage
+from util.url import download_webpage
 
 
 if __name__ == "__main__":
