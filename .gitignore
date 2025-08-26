@@ -1,4 +1,5 @@
 /.conda
 /.vscode
 /.webpage./*
+/webpage/*
 */__pycache__/
