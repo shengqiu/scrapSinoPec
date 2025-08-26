@@ -8,7 +8,7 @@ import time
 if __name__ == "__main__":
     db_init()
     page_max = config['payload']['pageNo']
-    for page in range(1, int(page_max)+1):
+    for page in range(11, int(page_max)+1):
         index_response = get_webpage_index(str(page))
         index_list = get_index_list_from_content(index_response)
         winner_list = []
@@ -19,5 +19,6 @@ if __name__ == "__main__":
             winner_result['url'] = config['listing_url'] + str(index)
             sql_value = [(winner_result['id'], winner_result['winner'], winner_result['contact'], winner_result['url'], winner_result['date'])]
             db_insert(sql_value)
-            time.sleep(1)
+            print(sql_value)
+            time.sleep(10)
     
