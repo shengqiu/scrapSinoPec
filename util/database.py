@@ -19,5 +19,5 @@ def db_init():
 def db_insert(users_to_add):
     conn = sqlite3.connect(config['db_name'])
     cursor = conn.cursor()
-    cursor.executemany("INSERT OR IGNORE INTO winners (id, winner, contact, date) VALUES (?, ?, ?, ?)", users_to_add)
+    cursor.executemany("INSERT OR IGNORE INTO winners (id, winner, contact, url, date) VALUES (?, ?, ?, ?, ?)", users_to_add)
     conn.commit()

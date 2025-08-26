@@ -29,7 +29,7 @@ def parse_winner_response(response):
     contact_table = soup.find_all('table')[3]
     contact = contact_table.get_text(strip=True)
     date_elements = soup.find('div', class_='wrapTitle').find_all('b')
-    data_elements_text = ' '.join([x.get_text(strip=True) for x in date_elements])
+    data_elements_text = ' '.join([x.get_text(strip=True) for x in date_elements]).split('浏览量')[0].strip()
     return {
         'winner': winner,
         'contact': contact,

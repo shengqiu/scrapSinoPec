@@ -16,7 +16,8 @@ if __name__ == "__main__":
             listing_response = get_listing_from_index(index)
             winner_result = parse_winner_response(listing_response)
             winner_result['id'] = index
-            sql_value = [(winner_result['id'], winner_result['winner'], winner_result['contact'], winner_result['date'])]
+            winner_result['url'] = config['listing_url'] + str(index)
+            sql_value = [(winner_result['id'], winner_result['winner'], winner_result['contact'], winner_result['url'], winner_result['date'])]
             db_insert(sql_value)
             time.sleep(1)
     
