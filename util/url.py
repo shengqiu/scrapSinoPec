@@ -17,29 +17,28 @@ def get_response(url):
         print(f"Error downloading webpage: {e}")
 
 
-def get_webpage_index(page_no=1):
+def get_bidding_index(pageNo="1", biddingType="openType"):
     """
     Downloads the HTML content of a webpage and saves it to a file.
     Args:
-        url (str): The URL of the webpage to download.
-        filename (str): The name of the file to save the content to.
+        pageNo (str): max page number, need to be specified
+        bidding (str): bidding type can be openType or closeType
     """
-    url = config['parent_url']
-    index_type = config['payload']['type']
-    headers = config['headers']
+    url = config[biddingType]['parent_url']
     payload = {
-        "pageNo": page_no,
-        "type":index_type 
+        "pageNo": pageNo,
+        "type": config[biddingType]['typeId'],
+        "paramJson": "{}"
     }
     try:
         s = requests.Session()
         response = s.post(
             url,
-            data=payload,
-            headers=headers
+            data=payload
         )
         response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
         print(response.status_code)
+        print(response.text)
         return response
     except requests.exceptions.RequestException as e:
         print(f"Error downloading webpage: {e}")
