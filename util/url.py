@@ -38,7 +38,6 @@ def get_bidding_index(pageNo="1", biddingType="openType"):
         )
         response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
         print(response.status_code)
-        print(response.text)
         return response
     except requests.exceptions.RequestException as e:
         print(f"Error downloading webpage: {e}")
