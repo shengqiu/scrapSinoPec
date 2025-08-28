@@ -14,7 +14,7 @@ if __name__ == "__main__":
         winner_list = []
         for index in index_list:
             listing_response = get_listing_from_index(index)
-            winner_result = parse_winner_response(listing_response)
+            winner_result = parse_winner_response(listing_response,'openType')
             winner_result['id'] = index
             winner_result['url'] = config['listing_url'] + str(index)
             sql_value = [
