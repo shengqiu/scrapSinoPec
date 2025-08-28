@@ -8,5 +8,5 @@ openType:
 
 listing_url: 'https://ec.sinopec.com/f/supp/notice/bidNotice.do?id='
 store_page_string: "webpage/{}.html"
-db_name: "test.db"
+db_name: "sinopec.db"
 pageNo: 50
