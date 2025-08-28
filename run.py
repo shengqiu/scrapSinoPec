@@ -26,5 +26,5 @@ if __name__ == "__main__":
             ]
             db_insert(sql_value)
             print(sql_value)
-            time.sleep(1)
+            time.sleep(5)
     
